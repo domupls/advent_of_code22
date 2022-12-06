@@ -15,4 +15,15 @@ def max_calories():
     return glo_max
 
 
-print(max_calories())
+# part two
+def top_three_calories():
+    cals = list()
+    loc_max = 0
+    for line in stdin:
+        if line == '\n':
+            cals.append(loc_max)
+            loc_max = 0
+        else:
+            loc_max += int(line)
+    sum_tops = sum(sorted(cals, reverse=True)[:3])
+    return sum_tops
