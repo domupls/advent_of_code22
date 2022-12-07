@@ -16,3 +16,20 @@ def sum_item_priority():
 
 
 # print(sum_item_priority())
+
+# part two
+def sum_group_priority():
+    priority = 0
+    group = []
+    for line in stdin:
+        group.append([*line[:-1]])
+        if len(group) == 3:
+            for c in group[0]:
+                if c in group[1] and c in group[2]:
+                    priority += ascii_letters.index(c) + 1
+                    group = []
+                    break
+    return priority
+
+
+# print(sum_group_priority())
