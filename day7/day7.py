@@ -12,13 +12,11 @@ def accumulate(list_: list):
         prev += list_[i]
 
 
-# part one
+# part one and two
 
-# values default to zero
-dirs = defaultdict(int)
-
-
-def find_size_of_dir():
+def find_size_of_dir(factor='big'):
+    # values default to zero
+    dirs = defaultdict(int)
     with open(filename) as f:
         file = f.readlines()
     for line in file:
@@ -37,7 +35,11 @@ def find_size_of_dir():
             case size, _:
                 for path in list(accumulate(curr_dir)):
                     dirs[path] += int(size)
+    if factor == 'smallest':
+        # 30mil - (70mil - dir[''])
+        return min(s for s in dirs.values() if s >= (dirs['/'] - 40_000_000))
     return sum(s for s in dirs.values() if s <= 100_000)
 
 
 print(find_size_of_dir())
+print(find_size_of_dir('smallest'))
